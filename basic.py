@@ -9,14 +9,16 @@ class Basic:
     def __init__(self):
         self.__accessToken = ''
         self.__leftTime = 0
-    def __real_get__access_token(self):
+    def __real_get_access_token(self):
         appId = 'wxb7d8a944f490ceb4'
         appSecret = 'aa543fc4ffe949ae4832baae18eb007d'
 
         postUrl = ("https://api.weixin.qq.com/cgi-bin/token?grant_type="
                 "client_credential&appid=%s&secret=%s" % (appId, appSecret))
         urlResp = urllib.urlopen(postUrl)
-        urlResp = json.loads(urlResp.read())
+        res = urlResp.read()
+        print res
+        urlResp = json.loads(res)
 
         self.__accessToken = urlResp['access_token']
         self.__leftTime = urlResp['expires_in']
