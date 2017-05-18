@@ -18,8 +18,10 @@ class Media(object):
         postUrl = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s" % (accessToken, mediaType)
         request = urllib2.Request(postUrl, postData, postHeaders)
         urlResp = urllib2.urlopen(request)
-        self.__mediaId = 
         print urlResp.read()
+        urlResp = json.loads(urlResp.read())
+        self.__mediaId = urlResp['media_id']
+        
 
 if __name__ == '__main__':
     myMedia = Media()
@@ -27,3 +29,4 @@ if __name__ == '__main__':
     filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
+    print 'main: mediaId = %s', myMedia.__mediaId

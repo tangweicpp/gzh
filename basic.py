@@ -17,7 +17,6 @@ class Basic:
                 "client_credential&appid=%s&secret=%s" % (appId, appSecret))
         urlResp = urllib.urlopen(postUrl)
         res = urlResp.read()
-        print res
         urlResp = json.loads(res)
 
         self.__accessToken = urlResp['access_token']
