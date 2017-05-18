@@ -12,6 +12,7 @@ def parse_xml(web_data):
     elif msg_type == 'image':
         return ImageMsg(xmlData)
 
+# Msg基类
 class Msg(object):
     def __init__(self, xmlData):
         self.ToUserName = xmlData.find('ToUserName').text
@@ -20,11 +21,13 @@ class Msg(object):
         self.MsgType = xmlData.find('MsgType').text
         self.MsgId = xmlData.find('MsgId').text
 
+# TextMsg子类
 class TextMsg(Msg):
     def __init__(self, xmlData):
         Msg.__init__(self, xmlData)
-        self.Content = xmlData.find('Content').text.encode('uft-8')
+        self.Content = xmlData.find('Content').text.encode('utf-8')
 
+# ImageMsg子类
 class ImageMsg(Msg):
     def __init__(self, xmlData):
         Msg.__init__(self, xmlData)

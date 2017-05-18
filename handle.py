@@ -2,7 +2,8 @@
 #coding:utf-8
 import hashlib
 import web
-
+import receive
+import reply
 class Handle(object):
     def GET(self):
         try:
@@ -33,11 +34,17 @@ class Handle(object):
             webData = web.data()
             print 'Handle Post webdata is ', webData
             recMsg = receive.parse_xml(webData)
-            if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
+            if isinstance(recMsg, receive.Msg):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                content = 'test'
-                replyMsg = reply.TextMsg(toUser, fromUser, content)
+                if recMsg.MsgType == 'text':
+                    content = recMsg.Content
+                    replyMsg = reply.TextMsg(toUser, fromUser, content)
+                elif recMsg.MsgType == 'image':
+                    mediaId = recMsg.MediaId
+                    replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
+                else:
+                    return reply.Msg().send()
                 return replyMsg.send()
             else:
                 print 'no deal'
