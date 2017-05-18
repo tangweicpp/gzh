@@ -58,4 +58,4 @@ class EventMsg(object):
 class Click(EventMsg):
     def __init__(self, xmlData):
         EventMsg.__init__(self, xmlData)
-        self.Eventkey = xmlData.find('EventKey').text
+        self.EventKey = xmlData.find('EventKey').text
