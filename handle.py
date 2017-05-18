@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+#coding:utf-8
 import hashlib
 import web
 
@@ -25,5 +25,22 @@ class Handle(object):
                 return echostr
             else:
                 return ''
+        except Exception, Arg:
+            return Arg
+
+    def POST(self):
+        try:
+            webData = web.data()
+            print 'Handle Post webdata is ', webData
+            recMsg = receive.parse_xml(webData)
+            if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
+                toUser = recMsg.FromUserName
+                fromUser = recMsg.ToUserName
+                content = 'test'
+                replyMsg = reply.TextMsg(toUser, fromUser, content)
+                return replyMsg.send()
+            else:
+                print 'no deal'
+                return 'success'
         except Exception, Arg:
             return Arg
