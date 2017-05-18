@@ -42,15 +42,19 @@ class Handle(object):
                 if recMsg.MsgType == 'text':
                     content = recMsg.Content
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
-                elif recMsg.MsgType == 'image':
+                if recMsg.MsgType == 'image':
                     mediaId = get_mediaId()
                     print '2:mediaId = ', mediaId
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
-                else:
-                    return reply.Msg().send()
+                
                 return replyMsg.send()
-            else:
-                print 'no deal'
-                return 'success'
+            if isinstance(recMsg, receive.EventMsg):
+                if recMsg.Event == 'CLICK':
+                    if recMsg.Eventkey == 'mpGuide':
+                        content = u'编写中,尚未完成'.encode('utf-8')
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
+                        return replyMsg.send()
+            print '暂且不处理'
+            return reply.Msg().send()
         except Exception, Arg:
             return Arg
