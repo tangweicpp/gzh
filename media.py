@@ -25,11 +25,18 @@ class Media(object):
         urlResp = json.loads(res)
         self.mediaId = urlResp['media_id']
         
-
+def get_mediaId():
+    myMedia = Media()
+    accessToken = Basic().get_access_token()
+    filePath = '/root/medias/test.jpg'
+    mediaType = 'image'
+    myMedia.upload(accessToken, filePath, mediaType)
+    print 'mediaId = ', myMedia.mediaId
+        
 if __name__ == '__main__':
     myMedia = Media()
     accessToken = Basic().get_access_token()
     filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
-    print 'main: mediaId = ', myMedia.mediaId
+    print 'mediaId = ', myMedia.mediaId

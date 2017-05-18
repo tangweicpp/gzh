@@ -4,6 +4,8 @@ import hashlib
 import web
 import receive
 import reply
+from media import get_mediaId
+
 class Handle(object):
     def GET(self):
         try:
@@ -41,7 +43,7 @@ class Handle(object):
                     content = recMsg.Content
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                 elif recMsg.MsgType == 'image':
-                    mediaId = recMsg.MediaId
+                    mediaId = get_mediaId()
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
                 else:
                     return reply.Msg().send()
