@@ -32,6 +32,7 @@ def get_mediaId():
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
     print 'mediaId = ', myMedia.mediaId
+    return myMedia.mediaId
         
 if __name__ == '__main__':
     myMedia = Media()

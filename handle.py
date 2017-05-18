@@ -44,6 +44,7 @@ class Handle(object):
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                 elif recMsg.MsgType == 'image':
                     mediaId = get_mediaId()
+                    print '2:mediaId = ', mediaId
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
                 else:
                     return reply.Msg().send()

@@ -18,7 +18,7 @@ class Basic:
         urlResp = urllib.urlopen(postUrl)
         res = urlResp.read()
         urlResp = json.loads(res)
-
+        print res
         self.__accessToken = urlResp['access_token']
         self.__leftTime = urlResp['expires_in']
 
