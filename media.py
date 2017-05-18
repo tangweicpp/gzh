@@ -9,7 +9,7 @@ from poster.streaminghttp import register_openers
 class Media(object):
     def __init__(self):
         register_openers()
-    # upload pictures
+    # 上传图片
     def upload(self, accessToken, filePath, mediaType):
         openFile = open(filePath, 'rb')
         param = {'media':openFile}
