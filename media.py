@@ -3,11 +3,13 @@
 
 from basic import Basic
 import urllib2
+import json
 import poster.encode
 from poster.streaminghttp import register_openers
 
 class Media(object):
     def __init__(self):
+        self.mediaId = ''
         register_openers()
     # 上传图片
     def upload(self, accessToken, filePath, mediaType):
@@ -18,9 +20,10 @@ class Media(object):
         postUrl = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s" % (accessToken, mediaType)
         request = urllib2.Request(postUrl, postData, postHeaders)
         urlResp = urllib2.urlopen(request)
-        print urlResp.read()
-        urlResp = json.loads(urlResp.read())
-        self.__mediaId = urlResp['media_id']
+        res = urlResp.read()
+        print res
+        urlResp = json.loads(res)
+        self.mediaId = urlResp['media_id']
         
 
 if __name__ == '__main__':
@@ -29,4 +32,4 @@ if __name__ == '__main__':
     filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
-    print 'main: mediaId = %s', myMedia.__mediaId
+    print 'main: mediaId = ', myMedia.mediaId
