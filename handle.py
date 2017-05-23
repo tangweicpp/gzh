@@ -62,7 +62,9 @@ class Handle(object):
             if isinstance(recMsg, receive.EventMsg):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
+                print 'Event -----'
                 if recMsg.Event == 'CLICK':
+                    print 'click -------'
                     if recMsg.EventKey == 'V1001_TEMP':
                      #   mediaId = get_mediaId()
                       #  replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
