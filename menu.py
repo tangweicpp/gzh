@@ -38,28 +38,39 @@ if __name__ == '__main__':
         "button":
         [
             {
-                "type":"click",
-                "name":"开发指引",
-                "key":"mpGuide"
-            },
-            {
-                "name":"公众平台",
+                "name":"操作menu1",
                 "sub_button":
                 [
                     {
-                        "type":"view",
-                        "name":"更新公告",
-                        "url":"http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1418702138&token=&lang=zh_CN"
+                        "type":"click",
+                        "name":"实况截图",
+                        "key":"V1001_SNAPSHOT"    
                     },
                     {
                         "type":"view",
-                        "name":"接口权限说明",
-                        "url":"http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1418702138&token=&lang=zh_CN"
+                        "name":"实时监控",
+                        "url":"http://"
+                    }
+                ]
+            },
+            {
+                "name":"操作menu2",
+                "sub_button":
+                [
+                    {
+                        "type":"click",
+                        "name":"获取温湿度",
+                        "key":"V1001_TEMP"
                     },
                     {
-                        "type":"view",
-                        "name":"返回码说明",
-                        "url":"http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433747234&token=&lang=zh_CN"
+                        "type":"click",
+                        "name":"cpu温度",
+                        "key":"V1001_CPU"
+                    },
+                    {
+                        "type":"click",
+                        "name":"今日天气",
+                        "key":"V1001_WEATHER"
                     }
                 ]
             }

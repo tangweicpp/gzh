@@ -44,7 +44,6 @@ class Handle(object):
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                 if recMsg.MsgType == 'image':
                     mediaId = get_mediaId()
-                    print '2:mediaId = ', mediaId
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
                 
                 return replyMsg.send()
@@ -52,11 +51,11 @@ class Handle(object):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
                 if recMsg.Event == 'CLICK':
-                    if recMsg.EventKey == 'mpGuide':
-                        mediaId = get_mediaId()
-                        replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
-#  content = u"编写中，尚未完成".encode('utf-8')
-#                       replyMsg = reply.TextMsg(toUser, fromUser, content)
+                    if recMsg.EventKey == 'V1001_TEMP':
+                     #   mediaId = get_mediaId()
+                      #  replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
+                        content = u"编写中，尚未完成".encode('utf-8')
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
             print '暂且不处理'
             return reply.Msg().send()
