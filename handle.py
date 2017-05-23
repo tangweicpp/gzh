@@ -69,9 +69,10 @@ class Handle(object):
                         content = u"编写中，尚未完成".encode('utf-8')
                         replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
-                    elif recMsg.EventKey == 'V1001_CPU':
+                    if recMsg.EventKey == 'V1001_CPU':
                         c = _cpu_and_gpu_temp()
                         content = u'CPU : %.02f℃' %c
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
             print '暂且不处理'
             return reply.Msg().send()
         except Exception, Arg:
