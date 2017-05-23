@@ -6,6 +6,18 @@ import receive
 import reply
 from media import get_mediaId
 
+def _cpu_and_gpu_temp():
+    '''Get from pi'''
+    import commands
+    try:
+        fd = open('/sys/class/thermal/thermal_zone0/temp')
+        ctemp = fd.read()
+        fd.close()
+        gtemp = commands.getoutput('/opt/vc/bin/vcgencmd measure_temp').replace('temp=', '').replace('\'C', '')
+    except Exception, e:
+        return (0, 0)
+    return (float(ctemp) / 1000, float(gtemp))
+
 class Handle(object):
     def GET(self):
         try:
@@ -57,6 +69,9 @@ class Handle(object):
                         content = u"编写中，尚未完成".encode('utf-8')
                         replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
+                    elif recMsg.EventKey == 'V1001_CPU':
+                        c, g = _cpu_and_gpu_temp()
+                        content = u'CPU : %.02f℃\nGPU : %.02f℃' %(c, g)
             print '暂且不处理'
             return reply.Msg().send()
         except Exception, Arg:
