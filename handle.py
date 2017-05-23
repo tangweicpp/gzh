@@ -13,10 +13,10 @@ def _cpu_and_gpu_temp():
         fd = open('/sys/class/thermal/thermal_zone0/temp')
         ctemp = fd.read()
         fd.close()
-        gtemp = commands.getoutput('/opt/vc/bin/vcgencmd measure_temp').replace('temp=', '').replace('\'C', '')
+        #gtemp = commands.getoutput('/opt/vc/bin/vcgencmd measure_temp').replace('temp=', '').replace('\'C', '')
     except Exception, e:
-        return (0, 0)
-    return (float(ctemp) / 1000, float(gtemp))
+        return 0
+    return float(ctemp) / 1000
 
 class Handle(object):
     def GET(self):
@@ -70,8 +70,8 @@ class Handle(object):
                         replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
                     elif recMsg.EventKey == 'V1001_CPU':
-                        c, g = _cpu_and_gpu_temp()
-                        content = u'CPU : %.02f℃\nGPU : %.02f℃' %(c, g)
+                        c = _cpu_and_gpu_temp()
+                        content = u'CPU : %.02f℃' %c
             print '暂且不处理'
             return reply.Msg().send()
         except Exception, Arg:
