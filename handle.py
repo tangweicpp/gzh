@@ -75,6 +75,7 @@ class Handle(object):
                     if recMsg.EventKey == 'V1001_CPU':
                         c = _cpu_and_gpu_temp()
                         content = u'CPU : %.02f℃' %c
+                        content = content.encode('utf-8')
                         replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
             print '暂且不处理'
