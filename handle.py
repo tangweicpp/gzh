@@ -4,6 +4,7 @@ import hashlib
 import web
 import receive
 import reply
+import tianqi
 from media import get_mediaId
 
 def _cpu_and_gpu_temp():
@@ -75,6 +76,11 @@ class Handle(object):
                     if recMsg.EventKey == 'V1001_CPU':
                         c = _cpu_and_gpu_temp()
                         content = u'CPU : %.02f℃' %c
+                        content = content.encode('utf-8')
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
+                        return replyMsg.send()
+                    if recMsg.EventKey == 'V1001_WEATHER':
+                        content = tianqi.tq()
                         content = content.encode('utf-8')
                         replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
