@@ -5,8 +5,10 @@ from basic import Basic
 import urllib2
 import json
 import poster.encode
+import os
 from poster.streaminghttp import register_openers
 
+no = 1
 class Media(object):
     def __init__(self):
         self.mediaId = ''
@@ -28,7 +30,8 @@ class Media(object):
 def get_mediaId():
     myMedia = Media()
     accessToken = Basic().get_access_token()
-    filePath = '/root/1.jpg'
+    take_picture()
+    filePath = r'/root/sources/%d.jpg' %(no++)
 #    filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
@@ -42,3 +45,8 @@ if __name__ == '__main__':
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
     print 'mediaId = ', myMedia.mediaId
+    
+def take_picture():
+    global no
+    cmd = r'fswebcam -d /dev/video0 -r 320x240 /root/sources/%d.jpg' %(no++)
+    os.system(cmd)
