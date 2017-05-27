@@ -58,12 +58,10 @@ class Handle(object):
                 if recMsg.MsgType == 'image':
                     mediaId = get_mediaId()
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
-                
                 return replyMsg.send()
             if isinstance(recMsg, receive.EventMsg):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                print 'Event -----'
                 if recMsg.Event == 'CLICK':
                     print 'click -------'
                     print recMsg.EventKey
@@ -84,6 +82,11 @@ class Handle(object):
                         content = content.encode('utf-8')
                         replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
+                    if recMsg.EventKey == 'V1001_SNAPSHOT':
+                        mediaId = get_mediaId()
+                        replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
+                        return replyMsg.send()
+                        
             print '暂且不处理'
             return reply.Msg().send()
         except Exception, Arg:

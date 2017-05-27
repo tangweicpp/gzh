@@ -28,7 +28,8 @@ class Media(object):
 def get_mediaId():
     myMedia = Media()
     accessToken = Basic().get_access_token()
-    filePath = '/root/medias/test.jpg'
+    filePath = '/root/1.jpg'
+#    filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
     print 'mediaId = ', myMedia.mediaId
