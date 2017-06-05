@@ -1,2 +1,2 @@
-cd /root/projs/gzh/gzh
-./main.py 80&
+cd /home/pi/Projs/gzh
+./main.py 80

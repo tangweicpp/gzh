@@ -45,11 +45,6 @@ if __name__ == '__main__':
                         "type":"click",
                         "name":"实况截图",
                         "key":"V1001_SNAPSHOT"    
-                    },
-                    {
-                        "type":"view",
-                        "name":"实时监控",
-                        "url":"http://"
                     }
                 ]
             },
@@ -73,6 +68,38 @@ if __name__ == '__main__':
                         "key":"V1001_WEATHER"
                     }
                 ]
+            },
+            {
+                "name":"小车控制",
+                "sub_button":
+                 [
+                    {
+                        "type":"click",
+                        "name":"前进",
+                        "key":"qianjin"
+                    },
+                    {
+                        "type":"click",
+                        "name":"后退",
+                        "key":"houtui"
+                    },
+                    {
+                        "type":"click",
+                        "name":"左转",
+                        "key":"zuozhuan"
+                    },
+                    {
+                        "type":"click",
+                        "name":"右转",
+                        "key":"youzhuan"  
+                    },
+                    {
+                        "type":"click",
+                        "name":"停止",
+                        "key":"ting"
+                    
+                    }
+                 ]
             }
         ]
     }

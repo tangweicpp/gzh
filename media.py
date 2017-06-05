@@ -31,7 +31,7 @@ def get_mediaId():
     myMedia = Media()
     accessToken = Basic().get_access_token()
     take_picture()
-    filePath = r'/root/sources/%d.jpg' %no
+    filePath = r'/home/pi/Sources/%d.jpg' %no
 #    filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
@@ -57,6 +57,6 @@ if __name__ == '__main__':
 def take_picture():
     global no
     no += 1
-    cmd = r'fswebcam -d /dev/video0 -r 960x640 /root/sources/%d.jpg' %no
+    cmd = r'fswebcam -d /dev/video0 -r 960x640 /home/pi/Sources/%d.jpg' %no
     os.system(cmd)
 
