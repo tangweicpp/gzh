@@ -5,6 +5,9 @@ import web
 import receive
 import reply
 import tianqi
+import urllib
+import urllib2
+import httplib
 from media import get_mediaId
 
 def _cpu_and_gpu_temp():
@@ -75,8 +78,60 @@ class Handle(object):
                         c = _cpu_and_gpu_temp()
                         content = u'CPU : %.02f℃' %c
                         content = content.encode('utf-8')
+                        
                         replyMsg = reply.TextMsg(toUser, fromUser, content)
                         return replyMsg.send()
+   
+                    if recMsg.EventKey == 'qianjin':
+                        content = u'前进'
+                        content = content.encode('utf-8')
+                        url = r'http://192.168.10.120/?pin=f'
+                        
+                        req = httplib.HTTPConnection('192.168.10.120')
+                        req.request(method='GET',url=url)
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
+                        return replyMsg.send()
+                    
+                    if recMsg.EventKey == 'houtui':
+                        content = u'后退'
+                        content = content.encode('utf-8')
+                        url = r'http://192.168.10.120/?pin=b'
+                        
+                        req = httplib.HTTPConnection('192.168.10.120')
+                        req.request(method='GET',url=url)
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
+                        return replyMsg.send()
+                    
+                    if recMsg.EventKey == 'zuozhuan':
+                        content = u'左转'
+                        content = content.encode('utf-8')
+                        url = r'http://192.168.10.120/?pin=l'
+                        
+                        req = httplib.HTTPConnection('192.168.10.120')
+                        req.request(method='GET',url=url)
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
+                        return replyMsg.send()
+                    
+                    if recMsg.EventKey == 'youzhuan':
+                        content = u'右转'
+                        content = content.encode('utf-8')
+                        url = r'http://192.168.10.120/?pin=r'
+                        
+                        req = httplib.HTTPConnection('192.168.10.120')
+                        req.request(method='GET',url=url)
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
+                        return replyMsg.send()
+                    
+                    if recMsg.EventKey == 'ting':
+                        content = u'停止'
+                        content = content.encode('utf-8')
+                        url = r'http://192.168.10.120/?pin=p'
+                        
+                        req = httplib.HTTPConnection('192.168.10.120')
+                        req.request(method='GET',url=url)
+                        replyMsg = reply.TextMsg(toUser, fromUser, content)
+                        return replyMsg.send()
+
                     if recMsg.EventKey == 'V1001_WEATHER':
                         content = tianqi.tq()
                         content = content.encode('utf-8')

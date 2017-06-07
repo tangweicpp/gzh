@@ -31,22 +31,32 @@ def get_mediaId():
     myMedia = Media()
     accessToken = Basic().get_access_token()
     take_picture()
-    filePath = r'/root/sources/%d.jpg' %(no++)
+    filePath = r'/home/pi/Sources/%d.jpg' %no
 #    filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
     print 'mediaId = ', myMedia.mediaId
     return myMedia.mediaId
         
+def _take_snapshot(addr, port):
+    url = 'http://%s:%d/?action=snapshot' %(addr, port)
+    req = urllib2.Request(url)
+    resp = urllib2.urlopen(req, timeout = 2)
+    print resp.read()
+# return client.media.upload.file(type = 'image', pic = resp)
 if __name__ == '__main__':
+    '''
     myMedia = Media()
     accessToken = Basic().get_access_token()
     filePath = '/root/medias/test.jpg'
     mediaType = 'image'
     myMedia.upload(accessToken, filePath, mediaType)
     print 'mediaId = ', myMedia.mediaId
-    
+    '''
+    _take_snapshot('127.0.0.1', 8080)  
 def take_picture():
     global no
-    cmd = r'fswebcam -d /dev/video0 -r 320x240 /root/sources/%d.jpg' %(no++)
+    no += 1
+    cmd = r'fswebcam -d /dev/video0 -r 960x640 /home/pi/Sources/%d.jpg' %no
     os.system(cmd)
+
